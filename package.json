@@ -1,0 +1,23 @@
+{
+  "name": "expenses",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "concurrently \"cd backend && node server.js\" \"cd client && npm start\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zpboff/expenses.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zpboff/expenses/issues"
+  },
+  "homepage": "https://github.com/zpboff/expenses#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}

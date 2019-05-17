@@ -6,19 +6,21 @@ class Navbar extends Component {
         return (
             <nav>
                 <div className="nav-wrapper">
-                    <a href="/" className="brand-logo">Logo</a>
+                    <a href="/" className="brand-logo home-button">
+                        <i className="medium material-icons">home</i>
+                    </a>
                     <ul id="nav-mobile" className="right hide-on-med-and-down">
                         <li>
-                            <NavLink href="/">First</NavLink>
+                            <NavLink href="/">Расходы</NavLink>
                         </li>
                         <li>
-                            <NavLink href="/">Second</NavLink>
+                            <NavLink href="/">Графики</NavLink>
                         </li>
                         <li>
-                            <NavLink href="/">Third</NavLink>
+                            <NavLink href="/">Итоги</NavLink>
                         </li>
                         <li>
-                            <NavLink to="/" className="btn btn-floating">PZ</NavLink>
+                            <NavLink to="/" className="btn btn-floating">ПЗ</NavLink>
                         </li>
                     </ul>
                 </div>

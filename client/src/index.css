@@ -11,3 +11,11 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+a.home-button {
+  padding-left: 10px;
+}
+
+a.home-button i {
+  font-size: 30px;
+}

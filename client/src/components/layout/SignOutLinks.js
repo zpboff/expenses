@@ -6,16 +6,16 @@ class SignOutLinks extends Component {
 		return (
 			<React.Fragment>
 				<li>
-					<NavLink href="/">Расходы</NavLink>
+					<NavLink to="/">Расходы</NavLink>
 				</li>
 				<li>
-					<NavLink href="/">Графики</NavLink>
+					<NavLink to="/">Графики</NavLink>
 				</li>
 				<li>
-					<NavLink href="/">Итоги</NavLink>
+					<NavLink to="/">Итоги</NavLink>
 				</li>
 				<li>
-					<NavLink href="/">Цели</NavLink>
+					<NavLink to="/">Цели</NavLink>
 				</li>
 				<li>
 					<NavLink to="/" className="btn btn-floating">

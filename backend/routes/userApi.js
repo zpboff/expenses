@@ -17,12 +17,12 @@ apiRouter.post('/signin', (req, res) => {
 	const { email, password } = req.body;
 
 	User.findOne({ email }, (error, user) => {
-		if (err) return res.status(500).json({ error: error.message });
+		if (error) return res.status(500).json({ error: error.message });
 
 		if (!user) return res.status(401).json({ error: 'Неверный логин или пароль' });
 
 		user.isCorrectPassword(password, (error, same) => {
-			if (err) return res.status(500).json({ error: error.message});
+			if (error) return res.status(500).json({ error: error.message});
 
 			if(!same) return res.status(401).json({ error: 'Неверный логин или пароль'});
 			

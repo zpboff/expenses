@@ -10,12 +10,14 @@ const UserSchema = new mongoose.Schema({
   lastName: { type: String },
   registeredAt: { type: Date },
   updatedAt: { type: Date },
+  initials: { type: String},
   roles: { type: Array }
 });
 
 UserSchema.pre('save', function(next) {
   if (this.isNew || this.isModified('password')) {
     const document = this;
+    document.initials = document.firstName[0] + document.lastName[0];
     bcrypt.hash(document.password, AppSettings.SaltRounds,
       function(err, hashedPassword) {
       if (err) {

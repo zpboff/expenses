@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import SignInLinks from './SignInLinks';
 import SignOutLinks from './SignOutLinks';
 import WithAuth from '../auth/WithAuth';
+import { connect } from 'react-redux'
 
 class Navbar extends Component {
 	render() {
@@ -13,7 +14,7 @@ class Navbar extends Component {
 						<i className="medium material-icons">home</i>
 					</NavLink>
 					<ul id="nav-mobile" className="right hide-on-med-and-down">
-						<WithAuth componentToProtect={SignOutLinks} withoutRedirect={true} />
+						<SignOutLinks />
 						<SignInLinks />
 					</ul>
 				</div>
@@ -22,4 +23,11 @@ class Navbar extends Component {
 	}
 }
 
-export default Navbar;
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.auth.isAuthenticated,
+		user: state.auth.user
+	}
+}
+
+export default connect(mapStateToProps)(Navbar);

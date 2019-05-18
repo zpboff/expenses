@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
-const dbRoute = "mongodb://localhost:27017/expenses";
+const { ConnectionStrings } = require('../configs')
 
 function initializeDbConnection() {
    mongoose.connect(
-      dbRoute,
+      ConnectionStrings.DbRoute,
       { useNewUrlParser: true }
    );
    

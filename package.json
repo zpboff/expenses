@@ -26,6 +26,9 @@
     "express": "^4.17.0",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.5.9",
-    "morgan": "^1.9.1"
+    "morgan": "^1.9.1",
+    "react-redux": "^7.0.3",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
   }
 }

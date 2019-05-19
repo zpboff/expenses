@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "concurrently \"cd backend && nodemon server\" \"cd client && npm start\""
+    "start": "concurrently \"cd backend && nodemon --inspect .\\server.js\" \"cd client && npm start\""
   },
   "repository": {
     "type": "git",

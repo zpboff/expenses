@@ -64,7 +64,7 @@ class SignIn extends Component {
                             />
                             <label htmlFor="email">Email</label>
                             {errors.email && (
-                                <span class="helper-text red lighten-1">
+                                <span className="helper-text red lighten-1">
                                     {errors.email}
                                 </span>
                             )}
@@ -84,7 +84,7 @@ class SignIn extends Component {
                             />
                             <label htmlFor="password">Пароль</label>
                             {errors.password && (
-                                <span class="helper-text red lighten-1">
+                                <span className="helper-text red lighten-1">
                                     {errors.password}
                                 </span>
                             )}

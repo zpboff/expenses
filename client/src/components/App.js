@@ -8,7 +8,6 @@ import jwt_decode from "jwt-decode";
 import store from "../store";
 import AuthProvider from "../providers/authProvider";
 import { setCurrentUser, logout } from "../actions/authActions";
-import { withRouter } from 'react-router-dom';
 
 if (localStorage.jwtToken) {
   AuthProvider.SetAuthToken(localStorage.jwtToken);
@@ -18,7 +17,7 @@ if (localStorage.jwtToken) {
   const currentTime = Date.now() / 1000;
   if (decoded.exp < currentTime) {
     store.dispatch(logout());
-    this.props.history.push('/login');
+    window.location.href = '/login'
   }
 }
 
@@ -37,4 +36,4 @@ function App() {
   );
 }
 
-export default withRouter(App);
+export default App;

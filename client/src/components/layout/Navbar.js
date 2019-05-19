@@ -24,7 +24,7 @@ class Navbar extends Component {
 }
 
 Navbar.propTypes = {
-	isAuthenticated: PropTypes.bool.isRequired
+	isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = (state) => ({

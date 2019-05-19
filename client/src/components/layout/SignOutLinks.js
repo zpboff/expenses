@@ -9,7 +9,7 @@ class SignOutLinks extends Component {
 
 	onLogout = (e) => {
 		e.preventDefault();
-		this.props.logoutUser(this.props.history);
+		this.props.logout(this.props.history);
 	};
 
 	render() {
@@ -38,7 +38,7 @@ class SignOutLinks extends Component {
 }
 
 SignOutLinks.propTypes = {
-    logoutUser: PropTypes.func.isRequired
+    logout: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = dispatch => {

@@ -3,7 +3,8 @@ import { NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { logout } from '../../actions/authActions'
-
+import { connect } from 'react-redux'
+	
 class SignOutLinks extends Component {
 
 	onLogout = (e) => {

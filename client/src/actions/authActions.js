@@ -5,7 +5,7 @@ import jwt_decode from 'jwt-decode';
 
 export const setCurrentUser = (decoded) => {
 	return {
-		type: SET_CURRENT_USER,
+		type: AuthActions.SET_CURRENT_USER,
 		payload: decoded
 	};
 };

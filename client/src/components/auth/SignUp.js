@@ -27,14 +27,23 @@ class SignUp extends Component {
 
 	handleSubmit = (event) => {
 		event.preventDefault();
-		this.props.registerUser({ ...this.state }, this.props.history);
+		this.props.signup({ ...this.state }, this.props.history);
 	};
 
 	componentWillReceiveProps(nextProps) {
+		if (nextProps.auth.isAuthenticated) {
+			this.props.history.push('/')
+		}
 		if (nextProps.errors) {
 			this.setState({
 				errors: nextProps.errors
 			});
+		}
+	}
+
+	componentDidMount() {
+		if (this.props.auth.isAuthenticated) {
+			this.props.history.push('/');
 		}
 	}
 
@@ -118,7 +127,7 @@ class SignUp extends Component {
 								value={lastName}
 								onChange={this.handleInputChange}
 							/>
-							<label htmlFor="lastName">Фамилия</label>							
+							<label htmlFor="lastName">Фамилия</label>
 							{errors.lastName && (<span class="helper-text red lighten-1">{errors.lastName}</span>)}
 						</div>
 					</div>
@@ -130,11 +139,13 @@ class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-	signup: PropTypes.func.isRequired
+	signup: PropTypes.func.isRequired,
+	isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = (state) => ({
-	errors: state.errors
+	errors: state.errors,
+	isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = (dispatch) => ({

@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 class SignOutLinks extends Component {
+	onLogout = (e) => {
+		e.preventDefault();
+		this.props.logoutUser(this.props.history);
+	};
+
 	render() {
+		const { isAuthenticated, user } = this.props.auth;
 		return (
 			<React.Fragment>
 				<li>
@@ -27,4 +33,14 @@ class SignOutLinks extends Component {
 	}
 }
 
-export default SignOutLinks;
+SignOutLinks.propTypes = {
+    logoutUser: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired
+}
+
+const mapStateToProps = (state) => ({
+	isAuthenticated : state.auth.isAuthenticated,
+	user: state.auth.user
+})
+
+export default connect(mapStateToProps, { logoutUser })(withRouter(SignOutLinks));

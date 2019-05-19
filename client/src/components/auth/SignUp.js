@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
-import AuthProvider from '../../providers/authProvider';
+import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
+import { signUp } from '../../actions/authActions';
+import { connect } from 'react-redux';
+import classnames from 'classnames';
 
 class SignUp extends Component {
 	constructor(props) {
@@ -8,7 +12,9 @@ class SignUp extends Component {
 			email: '',
 			password: '',
 			lastName: '',
-			firstName: ''
+			firstName: '',
+			passwordConfirm: '',
+			errors: {}
 		};
 	}
 
@@ -19,35 +25,39 @@ class SignUp extends Component {
 		});
 	};
 
-	onSubmit = (event) => {
+	handleSubmit = (event) => {
 		event.preventDefault();
-		AuthProvider.SignUp(this.state, (res) => {
-			if (res.status === 200) {
-				this.props.history.push('/');
-				return;
-			}
-
-			throw new Error(res.error);
-		});
+		this.props.registerUser({ ...this.state }, this.props.history);
 	};
 
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.errors) {
+			this.setState({
+				errors: nextProps.errors
+			});
+		}
+	}
+
 	render() {
-		var { email, password, lastName, firstName } = this.state;
+		var { email, password, passwordConfirm, lastName, firstName, errors } = this.state;
 		return (
 			<div className="container">
-				<h5>Введите данные</h5>
-				<form className="col s12" onSubmit={this.onSubmit}>
+				<h5>Регистрация</h5>
+				<form className="col s12" onSubmit={this.handleSubmit}>
 					<div className="row">
 						<div className="input-field col s12">
 							<input
 								id="email"
 								name="email"
 								type="email"
-								className="validate"
+								className={classnames('validate', {
+									invalid: errors.email
+								})}
 								value={email}
 								onChange={this.handleInputChange}
 							/>
 							<label htmlFor="email">Email</label>
+							{errors.email && (<span class="helper-text red lighten-1">{errors.email}</span>)}
 						</div>
 					</div>
 					<div className="row">
@@ -56,11 +66,30 @@ class SignUp extends Component {
 								id="password"
 								name="password"
 								type="password"
-								className="validate"
+								className={classnames('validate', {
+									invalid: errors.password
+								})}
 								value={password}
 								onChange={this.handleInputChange}
 							/>
 							<label htmlFor="password">Пароль</label>
+							{errors.password && (<span class="helper-text red lighten-1">{errors.password}</span>)}
+						</div>
+					</div>
+					<div className="row">
+						<div className="input-field col s12">
+							<input
+								id="passwordConfirm"
+								name="passwordConfirm"
+								type="password"
+								className={classnames('validate', {
+									invalid: errors.passwordConfirm
+								})}
+								value={passwordConfirm}
+								onChange={this.handleInputChange}
+							/>
+							<label htmlFor="passwordConfirm">Подтверждение пароля</label>
+							{errors.passwordConfirm && (<span class="helper-text red lighten-1">{errors.passwordConfirm}</span>)}
 						</div>
 					</div>
 					<div className="row">
@@ -69,22 +98,28 @@ class SignUp extends Component {
 								id="firstName"
 								name="firstName"
 								type="text"
-								className="validate"
+								className={classnames('validate', {
+									invalid: errors.firstName
+								})}
 								value={firstName}
 								onChange={this.handleInputChange}
 							/>
 							<label htmlFor="firstName">Имя</label>
+							{errors.firstName && (<span class="helper-text red lighten-1">{errors.firstName}</span>)}
 						</div>
 						<div className="input-field col s6">
 							<input
 								id="lastName"
 								name="lastName"
 								type="text"
-								className="validate"
+								className={classnames('validate', {
+									invalid: errors.lastName
+								})}
 								value={lastName}
 								onChange={this.handleInputChange}
 							/>
-							<label htmlFor="lastName">Фамилия</label>
+							<label htmlFor="lastName">Фамилия</label>							
+							{errors.lastName && (<span class="helper-text red lighten-1">{errors.lastName}</span>)}
 						</div>
 					</div>
 					<input type="submit" className="waves-effect waves-light btn" value="Регистрация" />
@@ -94,4 +129,16 @@ class SignUp extends Component {
 	}
 }
 
-export default SignUp;
+SignUp.propTypes = {
+	signUp: PropTypes.func.isRequired
+};
+
+const mapStateToProps = (state) => ({
+	errors: state.errors
+});
+
+const mapDispatchToProps = (dispatch) => ({
+	signUp: (user, history) => dispatch(signUp(user, history))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignUp));

@@ -1,49 +1,118 @@
 const express = require('express');
-const User = require('../db/dataModels/user');
-const apiRouter = express.Router();
+const router = express.Router();
+const gravatar = require('gravatar');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const passport = require('passport');
+const { validateSignIn, validateSignUp } = require('../helpers/validationHelper');
+const User = require('../db/dataModels/user');
 const { AppSettings } = require('../configs');
-const withAuth = require('../midleware');
 
-apiRouter.post('/signup', function(req, res) {
-	const user = new User(req.body);
-	user.save((error) => {
-		if (error) return res.status(500).json({ error: error.message });
-		const { email } = user;
-		const payload = { email };
-		const token = jwt.sign(payload, AppSettings.Secret, {
-			expiresIn: '1h'
-		});
+router.post('/signup', (req, res) => {
+	const { errors, isValid } = validateSignIn(req.body);
 
-		res.cookie('token', token, { httpOnly: true }).sendStatus(200);
-	});
-});
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
 
-apiRouter.post('/signin', (req, res) => {
-	const { email, password } = req.body;
-
-	User.findOne({ email }, (error, user) => {
-		if (error) return res.status(500).json({ error: error.message });
-
-		if (!user) return res.status(401).json({ error: 'Неверный логин или пароль' });
-
-		user.isCorrectPassword(password, (error, same) => {
-			if (error) return res.status(500).json({ error: error.message });
-
-			if (!same) return res.status(401).json({ error: 'Неверный логин или пароль' });
-
-			const payload = { email };
-			const token = jwt.sign(payload, AppSettings.Secret, {
-				expiresIn: '1h'
+	User.findOne({
+		email: req.body.email
+	}).then((user) => {
+		if (user) {
+			return res.status(400).json({
+				email: 'Email already exists'
+			});
+		} else {
+			const avatar = gravatar.url(req.body.email, {
+				s: '200',
+				r: 'pg',
+				d: 'mm'
+			});
+			const newUser = new User({
+				name: req.body.name,
+				email: req.body.email,
+				firstName: req.body.firstName,
+				lastName: req.body.lastName,
+				registeredAt: new Date(),
+				updatedAt: new Date(),
+				initials: req.body.firstName[0] + req.body.lastName[0],
+				password: req.body.password,
+				avatar
 			});
 
-			res.cookie('token', token, { httpOnly: true }).sendStatus(200);
+			bcrypt.genSalt(AppSettings.SaltRounds, (err, salt) => {
+				if (err) console.error('There was an error', err);
+				else {
+					bcrypt.hash(newUser.password, salt, (err, hash) => {
+						if (err) console.error('There was an error', err);
+						else {
+							newUser.password = hash;
+							newUser.save().then((user) => {
+								res.json(user);
+							});
+						}
+					});
+				}
+			});
+		}
+	});
+});
+
+router.post('/login', (req, res) => {
+	const { errors, isValid } = validateSignIn(req.body);
+
+	if (!isValid) {
+		return res.status(400).json(errors);
+	}
+
+	const email = req.body.email;
+	const password = req.body.password;
+
+	User.findOne({ email }).then((user) => {
+		if (!user) {
+			errors.email = 'User not found';
+			return res.status(404).json(errors);
+		}
+		bcrypt.compare(password, user.password).then((isMatch) => {
+			if (isMatch) {
+				const payload = {
+					id: user.id,
+					firstName: user.firstName,
+					lastName: user.lastName,
+					avatar: user.avatar
+				};
+				jwt.sign(
+					payload,
+					AppSettings.Secret,
+					{
+						expiresIn: AppSettings.TokenExpiresIn
+					},
+					(err, token) => {
+						if (err) console.error('There is some error in token', err);
+						else {
+							res.json({
+								success: true,
+								token
+							});
+						}
+					}
+				);
+			} else {
+				errors.password = 'Incorrect Password';
+				return res.status(400).json(errors);
+			}
 		});
 	});
 });
 
-apiRouter.get('/checkToken', withAuth, function(req, res) {
-	res.sendStatus(200);
+router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
+	return res.json({
+		id: req.user.id,
+		firstName: req.user.firstName,
+		lastName: req.user.lastName,
+		initials: req.user.initials,
+		email: req.user.email
+	});
 });
 
-module.exports = apiRouter;
+module.exports = router;

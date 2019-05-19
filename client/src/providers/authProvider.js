@@ -1,21 +1,11 @@
-import RequestHelper from '../helpers/requestHelper';
+import axios from 'axios';
 
 export default class AuthProvider {
-    static SignIn = (user, callback, errCallback) => {
-        const requestUrl = '/userapi/signin';
-
-        RequestHelper.Post(requestUrl, user, callback, errCallback);        
-    }
-
-    static SignUp = (user, callback, errCallback) => {
-        const requestUrl = '/userapi/signup';
-
-        RequestHelper.Post(requestUrl, user, callback, errCallback);        
-    }
-
-    static CheckAuth = (callback, errCallback) => {
-        const requestUrl = '/userapi/checkToken';
-
-        RequestHelper.Get(requestUrl, callback, errCallback); 
-    }
+	static SetAuthToken = (token) => {
+		if (token) {
+			axios.defaults.headers.common['Authorization'] = token;
+			return;
+		}
+		delete axios.defaults.headers.common['Authorization'];
+	};
 }

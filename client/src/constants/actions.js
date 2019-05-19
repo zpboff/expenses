@@ -1,6 +1,7 @@
 export const AuthActions = {
-    SignIn: 'SIGNIN',
-    SignUp: 'SIGNUP',
-    Logout: 'LOGOUT',
-    AuthError: 'AUTH_ERROR'
+    SET_CURRENT_USER: 'SET_CURRENT_USER',
+}
+
+export const ErrorActions = {    
+    GET_ERRORS: 'GET_ERRORS'
 }

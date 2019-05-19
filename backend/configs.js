@@ -5,6 +5,7 @@ const ConnectionStrings = {
 const AppSettings = {    
     Secret: 'cmsplanetstarpro',
     Port: 3001,
+    TokenExpiresIn: 3600,
     SaltRounds: 10
 }
 

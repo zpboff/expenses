@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
-import { signUp } from '../../actions/authActions';
+import { signup } from '../../actions/authActions';
 import { connect } from 'react-redux';
 import classnames from 'classnames';
 
@@ -130,7 +130,7 @@ class SignUp extends Component {
 }
 
 SignUp.propTypes = {
-	signUp: PropTypes.func.isRequired
+	signup: PropTypes.func.isRequired
 };
 
 const mapStateToProps = (state) => ({
@@ -138,7 +138,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-	signUp: (user, history) => dispatch(signUp(user, history))
+	signup: (user, history) => dispatch(signup(user, history))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignUp));

@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import AuthProvider from '../../providers/authProvider';
 import { connect } from 'react-redux';
-import { signIn } from '../../actions/authActions';
+import { signin } from '../../actions/authActions';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
 import classnames from 'classnames';
 
 class SignIn extends Component {
@@ -99,7 +98,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		signIn: (user) => dispatch(signIn(user))
+		signIn: (user) => dispatch(signin(user))
 	};
 };
 

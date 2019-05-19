@@ -3,7 +3,13 @@ import { ErrorActions, AuthActions } from '../constants/actions';
 import AuthProvider from '../providers/authProvider';
 import jwt_decode from 'jwt-decode';
 
-export const signUp = (user, history) => (dispatch) => {
+export const setCurrentUser = (decoded) => {
+	return {
+		type: SET_CURRENT_USER,
+		payload: decoded
+	};
+};
+export const signup = (user, history) => (dispatch) => {
 	axios.post('/auth/signup', user).then((res) => history.push('/login')).catch((err) => {
 		dispatch({
 			type: ErrorActions.GET_ERRORS,
@@ -12,7 +18,7 @@ export const signUp = (user, history) => (dispatch) => {
 	});
 };
 
-export const signIn = (user) => (dispatch) => {
+export const signin = (user) => (dispatch) => {
 	axios
 		.post('/auth/signin', user)
 		.then((res) => {
@@ -20,10 +26,7 @@ export const signIn = (user) => (dispatch) => {
 			localStorage.setItem('jwtToken', token);
 			AuthProvider.SetAuthToken(token);
 			const decoded = jwt_decode(token);
-			dispatch({
-				type: AuthActions.SET_CURRENT_USER,
-				payload: decoded
-			});
+			dispatch(setCurrentUser(decoded));
 		})
 		.catch((err) => {
 			dispatch({
@@ -31,4 +34,11 @@ export const signIn = (user) => (dispatch) => {
 				payload: err.response.data
 			});
 		});
+};
+
+export const logout = (history) => (dispatch) => {
+	localStorage.removeItem('jwtToken');
+	AuthProvider.SetAuthToken(false);
+	dispatch(setCurrentUser({}));
+	history.push('/login');
 };

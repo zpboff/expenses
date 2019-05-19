@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import { logout } from '../../actions/authActions'
 
 class SignOutLinks extends Component {
+
 	onLogout = (e) => {
 		e.preventDefault();
 		this.props.logoutUser(this.props.history);
 	};
 
 	render() {
-		const { isAuthenticated, user } = this.props.auth;
 		return (
 			<React.Fragment>
 				<li>
@@ -24,9 +27,9 @@ class SignOutLinks extends Component {
 					<NavLink to="/">Цели</NavLink>
 				</li>
 				<li>
-					<NavLink to="/" className="btn btn-floating">
+					<span onClick={this.onLogout} className="btn btn-floating">
 						ПЗ
-					</NavLink>
+					</span>
 				</li>
 			</React.Fragment>
 		);
@@ -34,13 +37,13 @@ class SignOutLinks extends Component {
 }
 
 SignOutLinks.propTypes = {
-    logoutUser: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    logoutUser: PropTypes.func.isRequired
 }
 
-const mapStateToProps = (state) => ({
-	isAuthenticated : state.auth.isAuthenticated,
-	user: state.auth.user
-})
+const mapDispatchToProps = dispatch => {
+	return {
+		logout: history => dispatch(logout(history))
+	}
+}
 
-export default connect(mapStateToProps, { logoutUser })(withRouter(SignOutLinks));
+export default connect(null, mapDispatchToProps)(withRouter(SignOutLinks));

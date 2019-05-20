@@ -15,7 +15,7 @@ const User = require("../db/dataModels/user");
 const { AppSettings } = require("../configs");
 
 router.post("/signup", (req, res) => {
-    const { errors, isValid } = validateSignIn(req.body);
+    const { errors, isValid } = validateSignUp(req.body);
 
     if (!isValid) {
         return res.status(400).json(errors);

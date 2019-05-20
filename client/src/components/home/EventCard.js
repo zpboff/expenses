@@ -2,26 +2,23 @@ import React, { Component } from "react";
 import classnames from "classnames";
 
 class EventCard extends Component {
-    getIcon = isIncome => {
-        return isIncome ? "monetization_on" : "money_off";
-    };
-
     render() {
-        const { event } = this.props;
+        const { isIncome, description, sum } = this.props.event;
         return (
             <li class="collection-item avatar">
                 <i
                     className={classnames("material-icons circle", {
-                        'teal lighten-1': event.isIncome,
-                        'red darken-1': !event.isIncome
+                        "teal lighten-1": isIncome,
+                        "red darken-1": !isIncome
                     })}
                 >
-                    {this.getIcon(event.isIncome)}
+                    {isIncome ? "monetization_on" : "money_off"}
                 </i>
-                <span class="title">{event.isIncome ? 'Доход' : 'Расход'}</span>
-                <p>{event.description}</p>
+                <span class="title">{isIncome ? "Доход" : "Расход"}</span>
+                <p>{description}</p>
+                <p>{sum}&nbsp;&#8381;</p>
                 <a href="#!" class="secondary-content">
-                    <i class="material-icons">grade</i>
+                    <i class="material-icons">forward</i>
                 </a>
             </li>
         );

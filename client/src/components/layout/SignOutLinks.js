@@ -17,13 +17,7 @@ class SignOutLinks extends Component {
 		return (
 			<React.Fragment>
 				<li>
-					<NavLink to="/expenses">Расходы</NavLink>
-				</li>
-				<li>
 					<NavLink to="/graphics">Графики</NavLink>
-				</li>
-				<li>
-					<NavLink to="/goals">Цели</NavLink>
 				</li>
 				<li>
 					<span onClick={this.onLogout} className="btn btn-floating">

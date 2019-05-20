@@ -1,7 +1,7 @@
 import React from "react";
 import Navbar from "./layout/Navbar";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Home from "./Home";
+import Home from "./home/Home";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
 import jwt_decode from "jwt-decode";
@@ -13,33 +13,45 @@ import Goals from "./Goals";
 import Expenses from "./Expenses";
 
 if (localStorage.jwtToken) {
-  AuthProvider.SetAuthToken(localStorage.jwtToken);
-  const decoded = jwt_decode(localStorage.jwtToken);
-  store.dispatch(setCurrentUser(decoded));
+    AuthProvider.SetAuthToken(localStorage.jwtToken);
+    const decoded = jwt_decode(localStorage.jwtToken);
+    store.dispatch(setCurrentUser(decoded));
 
-  const currentTime = Date.now() / 1000;
-  if (decoded.exp < currentTime) {
-    store.dispatch(logout());
-    window.location.href = '/login'
-  }
+    const currentTime = Date.now() / 1000;
+    if (decoded.exp < currentTime) {
+        store.dispatch(logout());
+        window.location.href = "/login";
+    }
 }
 
 function App() {
-  return (
-    <BrowserRouter>
-      <div className="App">
-        <Navbar />
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/graphics" component={Graphics} />
-          <Route exact path="/expenses" component={Expenses} />
-          <Route exact path="/goals" component={Goals} />
-          <Route exact path="/signin" component={SignIn} />
-          <Route exact path="/signup" component={SignUp} />
-        </Switch>
-      </div>
-    </BrowserRouter>
-  );
+    return (
+        <BrowserRouter>
+            <div className="App">
+                <Navbar />
+                <div className="dashboard container">
+                    <div className="row">
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route
+                                exact
+                                path="/graphics"
+                                component={Graphics}
+                            />
+                            <Route
+                                exact
+                                path="/expenses"
+                                component={Expenses}
+                            />
+                            <Route exact path="/goals" component={Goals} />
+                            <Route exact path="/signin" component={SignIn} />
+                            <Route exact path="/signup" component={SignUp} />
+                        </Switch>
+                    </div>
+                </div>
+            </div>
+        </BrowserRouter>
+    );
 }
 
 export default App;

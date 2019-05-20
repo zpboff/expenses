@@ -25,3 +25,11 @@ span.btn-floating {
   margin-left: 15px;
   margin-right: 15px;
 }
+
+.income-card {
+  background-color: #26a69a ;
+}
+
+.expense-card {
+  background-color: #ee6e73;
+}

@@ -19,3 +19,9 @@ a.home-button {
 a.home-button i {
   font-size: 30px;
 }
+
+span.btn-floating {
+  margin-top: -2px;
+  margin-left: 15px;
+  margin-right: 15px;
+}

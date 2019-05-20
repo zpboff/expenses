@@ -13,6 +13,7 @@ class SignOutLinks extends Component {
 	};
 
 	render() {
+		const { initials } = this.props;
 		return (
 			<React.Fragment>
 				<li>
@@ -29,7 +30,7 @@ class SignOutLinks extends Component {
 				</li>
 				<li>
 					<span onClick={this.onLogout} className="btn btn-floating">
-						ПЗ
+						{initials}
 					</span>
 				</li>
 			</React.Fragment>
@@ -41,10 +42,16 @@ SignOutLinks.propTypes = {
     logout: PropTypes.func.isRequired
 }
 
+const mapStateToProps = state => {
+	return {
+		initials: state.auth.user.initials
+	}
+}
+
 const mapDispatchToProps = dispatch => {
 	return {
 		logout: history => dispatch(logout(history))
 	}
 }
 
-export default connect(null, mapDispatchToProps)(withRouter(SignOutLinks));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(SignOutLinks));

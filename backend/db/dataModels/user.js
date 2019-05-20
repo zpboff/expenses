@@ -17,7 +17,8 @@ UserSchema.pre('save', function(next) {
 	if (this.isNew || this.isModified('password')) {
 		const document = this;
 		document.initials = document.firstName[0] + document.lastName[0];
-		bcrypt.hash(document.password, AppSettings.SaltRounds, function(err, hashedPassword) {
+		const salt = bcrypt.genSaltSync(AppSettings.SaltRounds);
+		bcrypt.hash(document.password, salt, function(err, hashedPassword) {
 			if (err) {
 				next(err);
 				return;

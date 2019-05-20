@@ -9,7 +9,6 @@ import store from "../store";
 import AuthProvider from "../providers/authProvider";
 import { setCurrentUser, logout } from "../actions/authActions";
 import Graphics from "./Graphics";
-import Results from "./Results";
 import Goals from "./Goals";
 import Expenses from "./Expenses";
 
@@ -34,7 +33,6 @@ function App() {
           <Route exact path="/" component={Home} />
           <Route exact path="/graphics" component={Graphics} />
           <Route exact path="/expenses" component={Expenses} />
-          <Route exact path="/results" component={Results} />
           <Route exact path="/goals" component={Goals} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />

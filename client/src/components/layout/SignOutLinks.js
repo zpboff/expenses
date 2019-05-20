@@ -23,9 +23,6 @@ class SignOutLinks extends Component {
 					<NavLink to="/graphics">Графики</NavLink>
 				</li>
 				<li>
-					<NavLink to="/results">Итоги</NavLink>
-				</li>
-				<li>
 					<NavLink to="/goals">Цели</NavLink>
 				</li>
 				<li>

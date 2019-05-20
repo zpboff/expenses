@@ -2,7 +2,6 @@ const express = require("express");
 const router = express.Router();
 const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
 const passport = require("passport");
 const authenticate = require('../providers/authProvider')
 
@@ -12,7 +11,6 @@ const {
 } = require("../helpers/validationHelper");
 
 const User = require("../db/dataModels/user");
-const { AppSettings } = require("../configs");
 
 router.post("/signup", (req, res) => {
     const { errors, isValid } = validateSignUp(req.body);
@@ -79,18 +77,12 @@ router.post("/signin", (req, res) => {
     });
 });
 
-router.get(
-    "/me",
-    passport.authenticate("jwt", { session: false }),
-    (req, res) => {
-        return res.json({
-            id: req.user.id,
-            firstName: req.user.firstName,
-            lastName: req.user.lastName,
-            initials: req.user.initials,
-            email: req.user.email
-        });
-    }
-);
+router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
+    return res.json({
+        id: req.user.id,
+        name: req.user.name,
+        email: req.user.email
+    });
+});
 
 module.exports = router;

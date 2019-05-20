@@ -1,13 +1,17 @@
 import React from "react";
 import Navbar from "./layout/Navbar";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import Landing from "./Landing";
+import Home from "./Home";
 import SignIn from "./auth/SignIn";
 import SignUp from "./auth/SignUp";
 import jwt_decode from "jwt-decode";
 import store from "../store";
 import AuthProvider from "../providers/authProvider";
 import { setCurrentUser, logout } from "../actions/authActions";
+import Graphics from "./Graphics";
+import Results from "./Results";
+import Goals from "./Goals";
+import Expenses from "./Expenses";
 
 if (localStorage.jwtToken) {
   AuthProvider.SetAuthToken(localStorage.jwtToken);
@@ -27,7 +31,11 @@ function App() {
       <div className="App">
         <Navbar />
         <Switch>
-          <Route exact path="/" component={Landing} />
+          <Route exact path="/" component={Home} />
+          <Route exact path="/graphics" component={Graphics} />
+          <Route exact path="/expenses" component={Expenses} />
+          <Route exact path="/results" component={Results} />
+          <Route exact path="/goals" component={Goals} />
           <Route exact path="/signin" component={SignIn} />
           <Route exact path="/signup" component={SignUp} />
         </Switch>

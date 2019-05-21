@@ -1,15 +1,20 @@
 import React, { Component } from 'react'
 import OperationCard from "./OperationCard";
 import { connect } from 'react-redux'
+import { setOpened } from '../../actions/modalActions';
+import Modal from '../../constants/modals';
 
 class OperationList extends Component {
     render() {
-        const { operations } = this.props;
+        const { operations, setOpened } = this.props;
         return (
             <div className="col s12 m6">
                 <div className="section">
                     <div>
-                        <span className="btn-floating right btn-large waves-effect waves-light red"><i className="material-icons">add</i></span>
+                        <span onClick={setOpened.bind(this, Modal.CreateOperation, true)}
+                            className="btn-floating right btn-large waves-effect waves-light red">
+                            <i className="material-icons">add</i>
+                        </span>
                         <h5>Операции</h5>
                     </div>
                     <div>
@@ -29,4 +34,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps)(OperationList)
+export default connect(mapStateToProps, { setOpened })(OperationList)

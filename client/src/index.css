@@ -1,12 +1,15 @@
 body {
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto",
+        "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+        "Helvetica Neue", sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+        monospace;
 }
 
 a.home-button {
@@ -36,5 +39,28 @@ span.btn-floating {
     display: block;
     opacity: 1;
     top: 10%;
+    width: 60%;
+    max-height: 80%;
     transform: scaleX(1) scaleY(1);
+}
+
+.switch label {
+    font-size: 1rem;
+}
+
+.switch.reverse label input[type="checkbox"]:checked + .lever {
+    background-color: #ee6e73;
+}
+
+.switch.reverse label input[type="checkbox"]:checked + .lever::after,
+.switch.reverse label input[type="checkbox"]:checked + .lever::before {
+    background-color: #f44336 ;
+}
+.switch.reverse label input[type="checkbox"]:not(:checked) + .lever {
+    background-color: #84c7c1;
+}
+
+.switch.reverse label input[type="checkbox"]:not(:checked) + .lever::after,
+.switch.reverse label input[type="checkbox"]:not(:checked) + .lever::before {
+    background-color: #2bbbad;
 }

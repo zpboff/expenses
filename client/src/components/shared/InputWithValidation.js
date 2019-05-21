@@ -1,25 +1,25 @@
 import React from 'react'
 import classnames from 'classnames'
 
-export default function InputWithValidation() {   
-    const { field, value, errors, label } = this.props; 
+export default function InputWithValidation(props) {   
+    const { field, value, error, label, type, onChange } = props;         
     return (
         <>
             <input
                 id={field}
                 name={field}
-                type="text"
+                type={type}
                 className={classnames("validate", {
-                    'invalid': errors[field]
+                    'invalid': !!error
                 })}
                 value={value}
-                onChange={this.handleInputChange}
+                onChange={onChange}
             />
             <label htmlFor={field}>{label}</label>
             {
-                errors[field] && (
+                error && (
                     <span className="helper-text red lighten-1">
-                        {errors[field]}
+                        {error}
                     </span>
                 )
             }

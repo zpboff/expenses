@@ -11,7 +11,7 @@ export const setCurrentUser = decoded => {
 };
 export const signup = (user, history) => dispatch => {
     axios
-        .post("/auth/signup", user)
+        .post("/api/auth/signup", user)
         .then(res => {
 			const { token, error, success } = res.data;
 			if(success){
@@ -33,7 +33,7 @@ export const signup = (user, history) => dispatch => {
 
 export const signin = user => dispatch => {
     axios
-        .post("/auth/signin", user)
+        .post("/api/auth/signin", user)
         .then(res => {
             const { token } = res.data;
             localStorage.setItem("jwtToken", token);

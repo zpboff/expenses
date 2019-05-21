@@ -15,8 +15,15 @@ export default function OperationList() {
         }
     ];
     return (
-        <ul class="collection">
-            {events && events.map(x => <OperationCard event={x} />)}
-        </ul>
+        <div className="col s12 m6">
+            <div className="section">
+                <h5>Операции</h5>
+                <p>
+                    <ul class="collection">
+                        {events && events.map((x,i) => <OperationCard key={`operation-${i}`} event={x} />)}
+                    </ul>
+                </p>
+            </div>
+        </div>
     );
 }

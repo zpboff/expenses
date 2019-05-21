@@ -38,12 +38,6 @@ function App() {
                                 path="/graphics"
                                 component={Graphics}
                             />
-                            <Route
-                                exact
-                                path="/expenses"
-                                component={Expenses}
-                            />
-                            <Route exact path="/goals" component={Goals} />
                             <Route exact path="/signin" component={SignIn} />
                             <Route exact path="/signup" component={SignUp} />
                         </Switch>

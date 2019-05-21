@@ -3,10 +3,10 @@ import classnames from 'classnames'
 
 class Popup extends Component {
     render() {
-        const { isOpen } = this.props;
+        const { isOpened } = this.props;
         return (
             <div className={classnames("modal", {
-                "open": isOpen
+                "open": isOpened
             })}>
                 <div className="modal-content">
                     <h4>Modal Header</h4>

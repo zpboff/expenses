@@ -1,35 +1,40 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
+    font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
 a.home-button {
-  padding-left: 10px;
+    padding-left: 10px;
 }
 
 a.home-button i {
-  font-size: 30px;
+    font-size: 30px;
 }
 
 span.btn-floating {
-  margin-top: -2px;
-  margin-left: 15px;
-  margin-right: 15px;
+    margin-top: -2px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .income-card {
-  background-color: #26a69a ;
+    background-color: #26a69a;
 }
 
 .expense-card {
-  background-color: #ee6e73;
+    background-color: #ee6e73;
+}
+
+.modal.open {
+    z-index: 1003;
+    display: block;
+    opacity: 1;
+    top: 10%;
+    transform: scaleX(1) scaleY(1);
 }

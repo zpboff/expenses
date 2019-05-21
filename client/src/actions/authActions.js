@@ -53,5 +53,5 @@ export const logout = history => dispatch => {
     localStorage.removeItem("jwtToken");
     AuthProvider.SetAuthToken(false);
     dispatch(setCurrentUser({}));
-    history.push("/login");
+    history.push("/signin");
 };

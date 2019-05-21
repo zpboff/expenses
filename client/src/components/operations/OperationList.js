@@ -9,14 +9,14 @@ class OperationList extends Component {
             <div className="col s12 m6">
                 <div className="section">
                     <div>
-                        <span className="btn-floating right btn-large waves-effect waves-light red"><i class="material-icons">add</i></span>
+                        <span className="btn-floating right btn-large waves-effect waves-light red"><i className="material-icons">add</i></span>
                         <h5>Операции</h5>
                     </div>
-                    <p>
-                        <ul class="collection">
+                    <div>
+                        <ul className="collection">
                             {operations && operations.map((x, i) => <OperationCard key={`operation-${i}`} event={x} />)}
                         </ul>
-                    </p>
+                    </div>
                 </div>
             </div>
         );

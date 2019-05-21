@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Operation = require("../db/dataModels/operations");
+const passport = require("passport");
 
 router.post("/create", passport.authenticate('jwt', { session: false }), (req, res) => {
     const { errors, isValid } = validateSignUp(req.body);
@@ -13,7 +14,7 @@ router.post("/create", passport.authenticate('jwt', { session: false }), (req, r
         userId: req.user.id,
         title: req.body.title,
         description: req.body.description,
-        amoun: req.body.amount
+        amount: req.body.amount
     });
 
     newOperation.save().then(operation => {

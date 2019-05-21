@@ -7,6 +7,11 @@ export default (state = {}, action) => {
 				...state,
 				operations: action.operations
 			};
+		case ExpenseActions.ADD_OPERATION:
+			return {
+				...state,
+				operations: state.operations.concat(action.operation)
+			};
 		default:
 			return state;
 	}

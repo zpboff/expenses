@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import OperationList from "./OperationList";
+import OperationList from "./operations/OperationList";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Landing from "./Landing";

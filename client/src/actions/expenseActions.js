@@ -18,3 +18,17 @@ export const getOperation = user => dispatch => {
             });
         });
 };
+
+export const createOperation = operation => dispatch => {
+    axios.post('/api/operation/create', operation).then(res => {
+        dispatch({
+            type: ExpenseActions.ADD_OPERATION,
+            operation
+        });
+    }).catch(err => {
+        dispatch({
+            type: ErrorActions.GET_ERRORS,
+            payload: err.response.data
+        });
+    })
+}

@@ -3,6 +3,7 @@ var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
 const userApiRoute = require('./routes/userApi')
+const operationApiRoute = require('./routes/operationApi')
 const initializeDbConnection = require('./db/connector')
 const { AppSettings } = require('./configs') 
 const cookieParser = require('cookie-parser');
@@ -21,6 +22,7 @@ app.use(cookieParser());
 app.use(logger("dev"));
 
 app.use("/api/auth", userApiRoute);
+app.use("/api/operation", operationApiRoute);
 
 
 app.listen(AppSettings.Port, () => console.log(`LISTENING ON PORT ${AppSettings.Port}`));

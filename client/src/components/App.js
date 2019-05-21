@@ -9,8 +9,6 @@ import store from "../store";
 import AuthProvider from "../providers/authProvider";
 import { setCurrentUser, logout } from "../actions/authActions";
 import Graphics from "./Graphics";
-import Goals from "./Goals";
-import Expenses from "./Expenses";
 
 if (localStorage.jwtToken) {
     AuthProvider.SetAuthToken(localStorage.jwtToken);

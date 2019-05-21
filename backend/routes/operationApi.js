@@ -21,13 +21,17 @@ router.post("/create", passport.authenticate('jwt', { session: false }), (req, r
     });
 });
 
-router.post("/signin", (req, res) => {
-
-});
-
 router.get('/getall', passport.authenticate('jwt', { session: false }), (req, res) => {
     Operation.find({ userId: req.user.id }).then(operations => {
         return res.status(200).json({ operations })
+    }).catch(err => {
+        return res.status(500).json({ error: err.message })
+    })
+});
+
+router.get('/get/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Operation.findById(req.params.id).then(operation => {
+        return res.status(200).json({ operation });
     }).catch(err => {
         return res.status(500).json({ error: err.message })
     })

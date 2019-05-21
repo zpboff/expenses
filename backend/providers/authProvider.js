@@ -26,7 +26,7 @@ const authenticate = (user, res) => {
             } else {
                 return res.json({
                     success: true,
-                    token
+                    token: `Bearer ${token}`
                 });
             }
         }

@@ -98,8 +98,8 @@ const validateSignIn = (data) => {
 const validateOperation = (data) => {
     let errors = {};
     data.title = !isEmpty(data.title) ? data.title : '';
-    data.description = !isEmpty(data.desctription) ? data.desctription : '';
-    data.amount = !isEmpty(data.amount) ? data.amount : '';
+    data.description = !isEmpty(data.description) ? data.description : '';
+    data.amount = !isEmpty(data.amount) ? data.amount.toString() : '';
 
     if(Validator.isEmpty(data.title)) {
         errors.title = 'Введите заголовок';
@@ -109,7 +109,7 @@ const validateOperation = (data) => {
         errors.description = 'Введите описание';
     }
     
-    if(Validator.isDecimal(data.title)) {
+    if(!Validator.isNumeric(data.amount)) {
         errors.amount = 'Сумма должна быть числом';
     }
     

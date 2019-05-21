@@ -1,6 +1,10 @@
 import { ExpenseActions } from '../constants/actions';
 
-export default (state = {}, action) => {
+const initialState = {
+	operations: []
+}
+
+export default (state = initialState, action) => {
 	switch (action.type) {
 		case ExpenseActions.SET_OPERATIONS:
 			return {

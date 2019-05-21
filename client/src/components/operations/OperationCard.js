@@ -3,9 +3,9 @@ import classnames from "classnames";
 
 class OperationCard extends Component {
     render() {
-        const { isIncome, description, sum } = this.props.event;
+        const { isIncome, description, amount, title } = this.props.operation;
         return (
-            <li class="collection-item avatar">
+            <li className="collection-item avatar">
                 <i
                     className={classnames("material-icons circle", {
                         "teal lighten-1": isIncome,
@@ -14,12 +14,9 @@ class OperationCard extends Component {
                 >
                     {isIncome ? "monetization_on" : "money_off"}
                 </i>
-                <span class="title">{isIncome ? "Доход" : "Расход"}</span>
-                <p>{description}</p>
-                <p>{sum}&nbsp;&#8381;</p>
-                <a href="#!" class="secondary-content">
-                    <i class="material-icons">forward</i>
-                </a>
+                <span className="title">{title}</span>
+                <p className='description'>{description}</p>
+                <p>{amount}&nbsp;&#8381;</p>
             </li>
         );
     }

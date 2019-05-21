@@ -18,47 +18,47 @@ const validateSignUp = (data) => {
     data.passwordConfirm = !isEmpty(data.passwordConfirm) ? data.passwordConfirm : '';
 
     if(!Validator.isLength(data.firstName, { min: 2, max: 30 })) {
-        errors.firstName = 'First name must be between 2 to 30 chars';
+        errors.firstName = 'Имя должно содержать не менее 2 символов';
     }
     
     if(Validator.isEmpty(data.firstName)) {
-        errors.firstName = 'First name field is required';
+        errors.firstName = 'Необходимо ввести имя';
     }
 
     if(!Validator.isLength(data.lastName, { min: 2, max: 30 })) {
-        errors.lastName = 'Last name must be between 2 to 30 chars';
+        errors.lastName = 'Фамилия должна содержать не менее 2 символов';
     }
     
     if(Validator.isEmpty(data.lastName)) {
-        errors.lastName = 'Last name field is required';
+        errors.lastName = 'Необходимо ввести фамилию';
     }
 
     if(!Validator.isEmail(data.email)) {
-        errors.email = 'Email is invalid';
+        errors.email = 'Неверный email';
     }
 
     if(Validator.isEmpty(data.email)) {
-        errors.email = 'Email is required';
+        errors.email = 'Необходимо ввести email';
     }
 
     if(!Validator.isLength(data.password, {min: 6, max: 30})) {
-        errors.password = 'Password must have 6 chars';
+        errors.password = 'Пароль должен содержать не менее 6 символов';
     }
 
     if(Validator.isEmpty(data.password)) {
-        errors.password = 'Password is required';
+        errors.password = 'Необходимо ввести пароль';
     }
 
     if(!Validator.isLength(data.passwordConfirm, {min: 6, max: 30})) {
-        errors.passwordConfirm = 'Password must have 6 chars';
+        errors.passwordConfirm = 'Пароль должен содержать не менее 6 символов';
     }
 
     if(!Validator.equals(data.password, data.passwordConfirm)) {
-        errors.passwordConfirm = 'Password and Confirm Password must match';
+        errors.passwordConfirm = 'Пароли должны совпадать';
     }
 
     if(Validator.isEmpty(data.passwordConfirm)) {
-        errors.passwordConfirm = 'Password is required';
+        errors.passwordConfirm = 'Необходимо ввести подтвердить пароль';
     }
 
     return {
@@ -73,19 +73,44 @@ const validateSignIn = (data) => {
     data.password = !isEmpty(data.password) ? data.password : '';
 
     if(!Validator.isEmail(data.email)) {
-        errors.email = 'Email is invalid';
+        errors.email = 'Неверный email';
     }
 
     if(Validator.isEmpty(data.email)) {
-        errors.email = 'Email is required';
+        errors.email = 'Необходимо ввести email';
     }
 
     if(!Validator.isLength(data.password, {min: 6, max: 30})) {
-        errors.password = 'Password must have 6 chars';
+        errors.password = 'Пароль должен содержать не менее 6 символов';
     }
 
     if(Validator.isEmpty(data.password)) {
-        errors.password = 'Password is required';
+        errors.password = 'Необходимо ввести пароль';
+    }
+    
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
+
+const validateOperation = (data) => {
+    let errors = {};
+    data.title = !isEmpty(data.title) ? data.title : '';
+    data.description = !isEmpty(data.desctription) ? data.desctription : '';
+    data.amount = !isEmpty(data.amount) ? data.amount : '';
+
+    if(Validator.isEmpty(data.title)) {
+        errors.title = 'Введите заголовок';
+    }
+
+    if(Validator.isEmpty(data.title)) {
+        errors.description = 'Введите описание';
+    }
+    
+    if(Validator.isDecimal(data.title)) {
+        errors.amount = 'Сумма должна быть числом';
     }
     
     return {
@@ -96,5 +121,6 @@ const validateSignIn = (data) => {
 
 module.exports = {
     validateSignIn,
-    validateSignUp
+    validateSignUp,
+    validateOperation
 } 

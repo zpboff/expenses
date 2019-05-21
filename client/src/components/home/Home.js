@@ -1,5 +1,5 @@
 import React from "react";
-import EventList from "./EventList";
+import OperationList from "./OperationList";
 
 export default function Home() {
     return (
@@ -7,7 +7,7 @@ export default function Home() {
             <div className="section">
                 <h5>Операции</h5>
                 <p>
-                    <EventList />
+                    <OperationList />
                 </p>
             </div>
         </div>

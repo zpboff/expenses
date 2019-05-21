@@ -20,7 +20,7 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger("dev"));
 
-app.use("/auth", userApiRoute);
+app.use("/api/auth", userApiRoute);
 
 
 app.listen(AppSettings.Port, () => console.log(`LISTENING ON PORT ${AppSettings.Port}`));

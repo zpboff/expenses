@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import classnames from "classnames";
 
-class EventCard extends Component {
+class OperationCard extends Component {
     render() {
         const { isIncome, description, sum } = this.props.event;
         return (
@@ -25,4 +25,4 @@ class EventCard extends Component {
     }
 }
 
-export default EventCard;
+export default OperationCard;

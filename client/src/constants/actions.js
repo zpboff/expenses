@@ -5,3 +5,7 @@ export const AuthActions = {
 export const ErrorActions = {    
     GET_ERRORS: 'GET_ERRORS'
 }
+
+export const ExpenseActions = {
+    SET_OPERATIONS: 'SET_OPERATIONS'
+}

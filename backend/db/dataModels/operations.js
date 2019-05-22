@@ -5,7 +5,8 @@ const OperationSchema = new mongoose.Schema({
 	isIncome: Boolean,
 	title: String,
 	description: String,
-	amount: Number
+	amount: Number,
+	createDate: Date
 });
 
 module.exports = mongoose.model('operations', OperationSchema);

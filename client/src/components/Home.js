@@ -3,19 +3,29 @@ import OperationList from "./operations/OperationList";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Landing from "./Landing";
+import GoalList from "./goals/goalList";
 
 class Home extends Component {
-    render(){
-        return this.props.isAuthenticated ? <OperationList/> : <Landing/>
+
+    render() {
+        if (this.props.isAuthenticated) {
+            return (
+                <>
+                    <OperationList />
+                    <GoalList />
+                </>
+            )
+        }
+        return <Landing />
     }
 }
 
 Home.propTypes = {
-	isAuthenticated: PropTypes.bool
+    isAuthenticated: PropTypes.bool
 }
 
 const mapStateToProps = (state) => ({
-	isAuthenticated : state.auth.isAuthenticated
+    isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps)(Home);

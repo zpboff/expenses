@@ -11,6 +11,11 @@ export default (state = initialState, action) => {
 				...state,
 				operations: action.operations
 			};
+		case ExpenseActions.SET_BALANCE:
+			return {
+				...state,
+				balance: action.balance
+			};
 		case ExpenseActions.ADD_OPERATION:
 			return {
 				...state,

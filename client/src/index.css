@@ -72,3 +72,19 @@ span.btn-floating {
 .collection-item p.description {
     font-size: 14px;
 }
+
+li.balance {
+    padding-right: 10px;
+}
+
+li.balance > li {
+    font-size: 20px;
+}
+
+i.medium.material-icons {
+    font-size: 3rem;
+}
+
+.balance-value {
+    font-size: 18px;
+}

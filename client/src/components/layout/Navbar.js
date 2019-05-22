@@ -11,12 +11,19 @@ class Navbar extends Component {
 		return (
 			<nav>
 				<div className="nav-wrapper">
-					<NavLink to="/" className="brand-logo home-button">
-						<i className="medium material-icons">home</i>
-					</NavLink>
-					<ul id="nav-mobile" className="right hide-on-med-and-down">
-						{isAuthenticated  ? <SignOutLinks /> :<SignInLinks />}
+					<ul className="left hide-on-med-and-down">
+						<li>
+							<NavLink to="/">
+								<i className="medium material-icons">home</i>
+							</NavLink>
+						</li>
+						{isAuthenticated && (
+							<li>
+								<NavLink to="/graphics">Графики</NavLink>
+							</li>
+						)}
 					</ul>
+					{isAuthenticated ? <SignOutLinks /> : <SignInLinks />}
 				</div>
 			</nav>
 		);
@@ -28,7 +35,7 @@ Navbar.propTypes = {
 }
 
 const mapStateToProps = (state) => ({
-	isAuthenticated : state.auth.isAuthenticated
+	isAuthenticated: state.auth.isAuthenticated
 })
 
 export default connect(mapStateToProps)(Navbar);

@@ -5,7 +5,7 @@ import Modal from "../constants/modals";
 
 export const getAllOperations = () => dispatch => {
     axios
-        .get("/api/operation/getall")
+        .get("/api/expense/getalloperations")
         .then(res => {
             const { operations } = res.data;
             dispatch({
@@ -23,17 +23,37 @@ export const getAllOperations = () => dispatch => {
 
 export const createOperation = operation => dispatch => {
     operation.amount = operation.amount * (operation.isIncome ? 1 : -1);
-    axios.post('/api/operation/create', operation).then(res => {
+    axios.post('/api/expense/createoperation', operation).then(res => {
         const { operation } = res.data;
         dispatch({
             type: ExpenseActions.ADD_OPERATION,
             operation
         });
-        setOpened(Modal.CreateOperation, false)(dispatch);
+        dispatch(setOpened(Modal.CreateOperation, false));
+        dispatch(getBalance());
     }).catch(err => {
         dispatch({
             type: ErrorActions.GET_ERRORS,
             payload: err.response.data
-        });        
+        });
+    })
+}
+
+export const getBalance = () => (dispatch, getState) => {
+    var { balance } = getState();
+    if (balance) {
+        return balance;
+    }
+    axios.get('/api/expense/getbalance').then(res => {
+        const { balance } = res.data;
+        dispatch({
+            type: ExpenseActions.SET_BALANCE,
+            balance
+        });
+    }).catch(err => {
+        dispatch({
+            type: ErrorActions.GET_ERRORS,
+            payload: err.response.data
+        });
     })
 }

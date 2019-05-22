@@ -7,6 +7,7 @@ export const ErrorActions = {
 }
 
 export const ExpenseActions = {
+    SET_BALANCE: 'SET_BALANCE',
     SET_OPERATIONS: 'SET_OPERATIONS',
     ADD_OPERATION: 'ADD_OPERATION'
 }

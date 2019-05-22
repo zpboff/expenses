@@ -3,8 +3,14 @@ import OperationCard from "./OperationCard";
 import { connect } from 'react-redux'
 import { setOpened } from '../../actions/modalActions';
 import Modal from '../../constants/modals';
+import { getAllOperations } from '../../actions/expenseActions';
 
 class OperationList extends Component {
+
+    componentDidMount(){
+        this.props.getAllOperations();
+    }
+
     render() {
         const { operations, setOpened } = this.props;
         return (
@@ -19,7 +25,7 @@ class OperationList extends Component {
                     </div>
                     <div>
                         <ul className="collection">
-                            {operations && operations.map((x, i) => <OperationCard key={`operation-${i}`} event={x} />)}
+                            {operations && operations.map((x, i) => <OperationCard key={`operation-${i}`} operation={x} />)}
                         </ul>
                     </div>
                 </div>
@@ -34,4 +40,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, { setOpened })(OperationList)
+export default connect(mapStateToProps, { setOpened, getAllOperations })(OperationList)

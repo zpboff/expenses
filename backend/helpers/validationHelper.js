@@ -98,7 +98,7 @@ const validateSignIn = (data) => {
 const validateOperation = (data) => {
     let errors = {};
     data.title = !isEmpty(data.title) ? data.title : '';
-    data.description = !isEmpty(data.desctription) ? data.desctription : '';
+    data.description = !isEmpty(data.description) ? data.description : '';
     data.amount = !isEmpty(data.amount) ? data.amount : '';
 
     if(Validator.isEmpty(data.title)) {
@@ -109,7 +109,7 @@ const validateOperation = (data) => {
         errors.description = 'Введите описание';
     }
     
-    if(Validator.isDecimal(data.title)) {
+    if(!Validator.isDecimal(data.amount.toString())) {
         errors.amount = 'Сумма должна быть числом';
     }
     

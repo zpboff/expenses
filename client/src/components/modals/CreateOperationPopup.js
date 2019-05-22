@@ -82,7 +82,7 @@ class CreateOperationPopup extends Component {
                             <div className="input-field col s6">
                                 <div className="switch reverse">
                                     <label>
-                                        Расход
+                                        Доход
                                         <input
                                             type="checkbox"
                                             value={isIncome}
@@ -93,7 +93,7 @@ class CreateOperationPopup extends Component {
                                             }
                                         />
                                         <span className="lever" />
-                                        Доход
+                                        Расход
                                     </label>
                                 </div>
                             </div>

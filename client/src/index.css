@@ -64,3 +64,11 @@ span.btn-floating {
 .switch.reverse label input[type="checkbox"]:not(:checked) + .lever::before {
     background-color: #2bbbad;
 }
+
+.collection-item {
+    cursor: pointer;
+}
+
+.collection-item p.description {
+    font-size: 14px;
+}

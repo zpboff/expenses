@@ -12,7 +12,5 @@ export const ExpenseActions = {
 }
 
 export const ModalActions = {
-    SET_OPENED: 'SET_OPENED',
-    SET_LOADING: 'SET_LOADING',
-    SET_DATA: 'SET_DATA'
+    SET_MODAL_FIELD: 'SET_MODAL_FIELD'
 }

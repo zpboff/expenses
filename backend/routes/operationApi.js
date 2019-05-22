@@ -2,9 +2,10 @@ const express = require("express");
 const router = express.Router();
 const Operation = require("../db/dataModels/operations");
 const passport = require("passport");
+const { validateOperation } = require('../helpers/validationHelper')
 
 router.post("/create", passport.authenticate('jwt', { session: false }), (req, res) => {
-    const { errors, isValid } = validateSignUp(req.body);
+    const { errors, isValid } = validateOperation({...req.body});
 
     if (!isValid) {
         return res.status(400).json(errors);
@@ -13,12 +14,13 @@ router.post("/create", passport.authenticate('jwt', { session: false }), (req, r
     const newOperation = new Operation({
         userId: req.user.id,
         title: req.body.title,
+        isIncome: req.body.isIncome,
         description: req.body.description,
         amount: req.body.amount
     });
 
     newOperation.save().then(operation => {
-        res.status(200);
+        return res.status(200).json({ operation });
     });
 });
 

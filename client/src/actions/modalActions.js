@@ -1,25 +1,22 @@
 import { ModalActions } from "../constants/actions";
 
-export const setOpened = (popupName, isOpened) => dispatch => {
-    dispatch({
-        type: ModalActions.SET_OPENED,
+const setModalField = (popupName, field, value) => {
+    return {
+        type: ModalActions.SET_MODAL_FIELD,
         popupName,
-        isOpened
-    });
+        field,
+        value
+    }
+}
+
+export const setOpened = (popupName, isOpened) => dispatch => {
+    dispatch(setModalField(popupName, 'isOpened', isOpened));
 };
 
 export const setLoading = (popupName, isLoading) => dispatch => {
-    dispatch({
-        type: ModalActions.SET_LOADING,
-        popupName,
-        isLoading
-    });
+    dispatch(setModalField(popupName, 'isLoading', isLoading));
 };
 
 export const setData = (popupName, data) => dispatch => {
-    dispatch({
-        type: ModalActions.SET_LOADING,
-        popupName,
-        data
-    });
+    dispatch(setModalField(popupName, 'data', data));
 };

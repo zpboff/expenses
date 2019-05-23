@@ -67,11 +67,9 @@ class CreateGoalPopup extends Component {
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <input
-                                    type="submit"
-                                    className="waves-effect waves-light btn"
-                                    value="Добавить"
-                                />
+                                <button class="btn waves-effect waves-light" type="submit" name="action">
+                                    Добавить
+                                </button>
                             </div>
                         </div>
                     </form>

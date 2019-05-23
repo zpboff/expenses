@@ -54,11 +54,9 @@ class GoalList extends Component {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        isLoading: state.interface[Components.GoalList].isLoading,
-        goals: state.expenses.goals
-    }
-}
+const mapStateToProps = state => ({
+    isLoading: state.interface[Components.GoalList].isLoading,
+    goals: state.expenses.goals
+})
 
 export default connect(mapStateToProps, { setOpened, getAllGoals })(GoalList)

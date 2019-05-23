@@ -160,13 +160,8 @@ class SignUp extends Component {
                             )}
                         </div>
                     </div>
-                    <button
-                        className="btn waves-effect waves-light btn-large"
-                        type="submit"
-                        name="action"
-                    >
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
                         Зарегистрироваться
-                        <i className="material-icons right">send</i>
                     </button>
                 </form>
             </div>

@@ -22,6 +22,16 @@ export default (state = initialState, action) => {
 				...state,
 				operations: state.operations.concat(action.operation)
 			};
+		case ExpenseActions.SET_GOALS:
+			return {
+				...state,
+				goals: action.goals
+			};
+		case ExpenseActions.ADD_GOAL:
+			return {
+				...state,
+				goals: state.goals.concat(action.goal)
+			};
 		default:
 			return state;
 	}

@@ -121,7 +121,7 @@ const validateOperation = (data) => {
 
 const validateGoal = (data) => {
     let errors = {};
-    data.target = !isEmpty(data.title) ? data.title : '';
+    data.target = !isEmpty(data.target) ? data.target : '';
     data.amount = !isEmpty(data.amount) ? data.amount : '';
 
     if(Validator.isEmpty(data.target)) {

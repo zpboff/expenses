@@ -6,13 +6,15 @@ import Modal from '../../constants/modals';
 import { getAllOperations } from '../../actions/expenseActions';
 import Components from '../../constants/components';
 import Preloader from '../shared/Preloader'
+import DatePicker from 'react-date-picker';
 
 class OperationList extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            startDate: new Date()
+            startDate: new Date(),
+            finishDate: new Date()
         }
     }
 
@@ -20,9 +22,7 @@ class OperationList extends Component {
         this.props.getAllOperations();
     }
 
-    handeDateChange = e => {
-        this.setState({ startDate: e })
-    }
+    handeDateChange = (field, date) => this.setState({ [field]: date })
 
     renderBody = () => {
         const { operations, isLoading, setOpened } = this.props;
@@ -37,7 +37,16 @@ class OperationList extends Component {
 
         return (
             <>
-                <span>Тут должен был быть datepicker</span>
+                <div>
+                    От:&nbsp;<DatePicker
+                        onChange={this.handeDateChange.bind(this, 'startDate')}
+                        value={this.state.startDate}
+                    />                    
+                    До:&nbsp;<DatePicker
+                        onChange={this.handeDateChange.bind(this, 'finishDate')}
+                        value={this.state.finishDate}
+                    />
+                </div>
                 {
                     !!operations.length && (
                         <div>

@@ -61,6 +61,23 @@ export const createOperation = operation => dispatch => {
     })
 }
 
+export const createGoal = operation => dispatch => {
+    operation.amount = operation.amount * (operation.isIncome ? 1 : -1);
+    axios.post('/api/expense/creategoal', operation).then(res => {
+        const { goal } = res.data;
+        dispatch({
+            type: ExpenseActions.ADD_GOAL,
+            goal
+        });
+        dispatch(setOpened(Modal.CreateGoal, false));
+    }).catch(err => {
+        dispatch({
+            type: ErrorActions.GET_ERRORS,
+            payload: err.response.data
+        });
+    })
+}
+
 export const getBalance = () => (dispatch, getState) => {
     var { balance } = getState();
     if (balance) {

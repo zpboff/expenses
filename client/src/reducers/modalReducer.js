@@ -1,15 +1,21 @@
 import { ModalActions } from '../constants/actions';
 import Modal from '../constants/modals';
 
-const initialState = {
-	[Modal.CreateOperation]: {
-		isOpened: false,
+const getInitialModalState = () => {
+	return {
 		isLoading: false,
+		isOpened: false,
 		data: {}
 	}
 }
 
-export default (state = initialState, action) => {
+const getInitialState = () => {
+	var initialState = {};
+	Object.keys(Modal).forEach(x => initialState[x] = getInitialModalState())
+	return initialState;
+}
+
+export default (state = getInitialState(), action) => {
 	switch (action.type) {
 		case ModalActions.SET_MODAL_FIELD:
 			return {

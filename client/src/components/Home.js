@@ -3,7 +3,7 @@ import OperationList from "./operations/OperationList";
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import Landing from "./Landing";
-import GoalList from "./goals/goalList";
+import GoalList from "./goals/GoalList";
 
 class Home extends Component {
 

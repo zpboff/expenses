@@ -10,7 +10,8 @@ export const ExpenseActions = {
     SET_BALANCE: 'SET_BALANCE',
     SET_OPERATIONS: 'SET_OPERATIONS',
     SET_GOALS: 'SET_GOALS',
-    ADD_OPERATION: 'ADD_OPERATION'
+    ADD_OPERATION: 'ADD_OPERATION',
+    ADD_GOAL: 'ADD_GOAL'
 }
 
 export const InterfaceActions = {

@@ -1,7 +1,8 @@
 import { ExpenseActions } from '../constants/actions';
 
 const initialState = {
-	operations: []
+	operations: [],
+	goals: []
 }
 
 export default (state = initialState, action) => {

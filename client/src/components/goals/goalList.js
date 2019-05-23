@@ -2,18 +2,42 @@ import React, { Component } from 'react'
 import Components from '../../constants/components';
 import Preloader from '../shared/Preloader';
 import { connect } from 'react-redux'
+import Modal from '../../constants/modals';
+import { getAllGoals } from '../../actions/expenseActions';
+import { setOpened } from '../../actions/modalActions'
 
 class GoalList extends Component {
 
+    componentDidMount() {
+        this.props.getAllGoals();
+    }
+
     renderBody = () => {
-        const { isLoading } = this.props;
+        const { isLoading, goals, setOpened } = this.props;
 
         if (isLoading) {
             return (
                 <Preloader />
             )
         }
-        return 'Нет текущих целей';
+        return (
+            <>
+                {
+                    !!goals.length && (
+                        <div>
+                            <ul className="collection">
+                                {goals.map((x, i) => <div>{x.target}</div>)}
+                            </ul>
+                        </div>
+                    )
+                }
+                {!goals.length && <span>Нет операций за выбранный период</span>}
+                <span onClick={setOpened.bind(this, Modal.CreateGoal, true)}
+                    className="btn-floating btn-medium waves-effect waves-light red">
+                    <i className="material-icons">add</i>
+                </span>
+            </>
+        )
     }
 
     render() {
@@ -32,8 +56,9 @@ class GoalList extends Component {
 
 const mapStateToProps = state => {
     return {
-        isLoading: state.interface[Components.GoalList].isLoading
+        isLoading: state.interface[Components.GoalList].isLoading,
+        goals: state.expenses.goals
     }
 }
 
-export default connect(mapStateToProps)(GoalList)
+export default connect(mapStateToProps, { setOpened, getAllGoals })(GoalList)

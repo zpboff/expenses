@@ -9,7 +9,7 @@ class OperationCard extends Component {
                 <i
                     className={classnames("material-icons circle", {
                         "teal lighten-1": isIncome,
-                        "red darken-1": !isIncome
+                        "coral": !isIncome
                     })}
                 >
                     {isIncome ? "monetization_on" : "money_off"}

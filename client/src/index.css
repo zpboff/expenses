@@ -34,6 +34,10 @@ span.btn-floating {
     background-color: #ee6e73;
 }
 
+.collection li.collection-item i.material-icons.coral {
+    background-color: #ee6e73;
+}
+
 .modal.open {
     z-index: 1003;
     display: block;

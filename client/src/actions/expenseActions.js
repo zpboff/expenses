@@ -2,6 +2,8 @@ import axios from "axios";
 import { ErrorActions, ExpenseActions } from "../constants/actions";
 import { setOpened } from "./modalActions";
 import Modal from "../constants/modals";
+import Components from "../constants/components";
+import { setComponentLoading } from './interfaceActions'
 
 export const getAllOperations = () => dispatch => {
     axios
@@ -12,6 +14,26 @@ export const getAllOperations = () => dispatch => {
                 type: ExpenseActions.SET_OPERATIONS,
                 operations
             });
+            dispatch(setComponentLoading(Components.OperationList, false))
+        })
+        .catch(err => {
+            dispatch({
+                type: ErrorActions.GET_ERRORS,
+                payload: err.response.data
+            });
+        });
+};
+
+export const getAllGoals = () => dispatch => {
+    axios
+        .get("/api/expense/getallgoals")
+        .then(res => {
+            const { goals } = res.data;
+            dispatch({
+                type: ExpenseActions.SET_GOALS,
+                goals
+            });
+            dispatch(setComponentLoading(Components.GoalList, false))
         })
         .catch(err => {
             dispatch({

@@ -119,8 +119,28 @@ const validateOperation = (data) => {
     }
 }
 
+const validateGoal = (data) => {
+    let errors = {};
+    data.target = !isEmpty(data.title) ? data.title : '';
+    data.amount = !isEmpty(data.amount) ? data.amount : '';
+
+    if(Validator.isEmpty(data.target)) {
+        errors.target = 'Введите цель';
+    }
+
+    if(!Validator.isDecimal(data.amount.toString())) {
+        errors.amount = 'Сумма должна быть числом';
+    }
+    
+    return {
+        errors,
+        isValid: isEmpty(errors)
+    }
+}
+
 module.exports = {
     validateSignIn,
     validateSignUp,
-    validateOperation
+    validateOperation,
+    validateGoal
 } 

@@ -1,8 +1,45 @@
 const express = require("express");
 const router = express.Router();
 const Operation = require("../db/dataModels/operations");
+const Goal = require("../db/dataModels/goal");
 const passport = require("passport");
-const { validateOperation } = require('../helpers/validationHelper')
+const { validateOperation, validateGoal } = require('../helpers/validationHelper')
+
+router.post("/creategoal", passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { errors, isValid } = validateGoal({ ...req.body });
+
+    if (!isValid) {
+        return res.status(400).json(errors);
+    }
+
+    const newGoal = new Goal({
+        userId: req.user.id,
+        target: req.body.target,
+        amount: req.body.amount,
+        finishDate: req.body.finishDate,
+        createDate: new Date()
+    });
+
+    newGoal.save().then(goal => {
+        return res.status(200).json({ goal });
+    });
+});
+
+router.get('/getallgoals', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Goal.find({ userId: req.user.id }).limit(10).sort([['createDate', -1]]).then(goals => {
+        return res.status(200).json({ goals })
+    }).catch(err => {
+        return res.status(500).json({ error: err.message })
+    })
+});
+
+router.get('/getoperation/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+    Operation.findById(req.params.id).then(operation => {
+        return res.status(200).json({ operation });
+    }).catch(err => {
+        return res.status(500).json({ error: err.message })
+    })
+});
 
 router.post("/createoperation", passport.authenticate('jwt', { session: false }), (req, res) => {
     const { errors, isValid } = validateOperation({ ...req.body });

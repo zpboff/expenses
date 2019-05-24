@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Modal from '../../constants/modals';
 import { getAllGoals } from '../../actions/expenseActions';
 import { setOpened } from '../../actions/modalActions'
+import GoalCard from './GoalCard';
 
 class GoalList extends Component {
 
@@ -24,10 +25,24 @@ class GoalList extends Component {
             <>
                 {
                     !!goals.length && (
-                        <div>
-                            <ul className="collection">
-                                {goals.map((x, i) => <div>{x.target}</div>)}
-                            </ul>
+                        <div class="card">
+                            <div class="card-content">
+                                <p>Цели</p>
+                            </div>
+                            <div class="card-tabs">
+                                <ul class="tabs tabs-fixed-width">
+                                    {goals.map((x,i) => (
+                                        <li class="tab">
+                                            <a href={`#goal-${i}`}>{x.target}</a>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                            <div class="card-content grey lighten-4">
+                                {goals.map((x,i) => (
+                                    <GoalCard goal={x} id={`goal-${i}`}/>                                                            
+                                ))}
+                            </div>
                         </div>
                     )
                 }

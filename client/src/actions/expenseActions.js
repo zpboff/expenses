@@ -5,9 +5,9 @@ import Modal from "../constants/modals";
 import Components from "../constants/components";
 import { setComponentLoading } from './interfaceActions'
 
-export const getAllOperations = () => dispatch => {
+export const getAllOperations = (startDate, endDate) => dispatch => {
     axios
-        .get("/api/expense/getalloperations")
+        .get(`/api/expense/getalloperations/${startDate}/${endDate}`)
         .then(res => {
             const { operations } = res.data;
             dispatch({
@@ -61,9 +61,8 @@ export const createOperation = operation => dispatch => {
     })
 }
 
-export const createGoal = operation => dispatch => {
-    operation.amount = operation.amount * (operation.isIncome ? 1 : -1);
-    axios.post('/api/expense/creategoal', operation).then(res => {
+export const createGoal = goal => dispatch => {
+    axios.post('/api/expense/creategoal', goal).then(res => {
         const { goal } = res.data;
         dispatch({
             type: ExpenseActions.ADD_GOAL,

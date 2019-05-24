@@ -9,20 +9,26 @@ import Preloader from '../shared/Preloader'
 import DatePicker from 'react-date-picker';
 
 class OperationList extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            startDate: new Date(),
-            finishDate: new Date()
-        }
+    state = {
+        startDate: new Date(),
+        endDate: new Date()
     }
 
     componentDidMount() {
-        this.props.getAllOperations();
+        const { startDate, endDate } = this.state; 
+        this.props.getAllOperations(startDate, endDate);
     }
 
-    handeDateChange = (field, date) => this.setState({ [field]: date })
+    handeDateChange = (field, date) => {
+        if(this.state[field] !== date){
+            const newState = {
+                ...this.state,
+                [field]: date
+            }            
+            this.props.getAllOperations(newState.startDate, newState.endDate);
+            this.setState({ [field]: date })
+        }
+    }
 
     renderBody = () => {
         const { operations, isLoading, setOpened } = this.props;
@@ -41,10 +47,10 @@ class OperationList extends Component {
                     От:&nbsp;<DatePicker
                         onChange={this.handeDateChange.bind(this, 'startDate')}
                         value={this.state.startDate}
-                    />                    
+                    />
                     До:&nbsp;<DatePicker
-                        onChange={this.handeDateChange.bind(this, 'finishDate')}
-                        value={this.state.finishDate}
+                        onChange={this.handeDateChange.bind(this, 'endDate')}
+                        value={this.state.endDate}
                     />
                 </div>
                 {

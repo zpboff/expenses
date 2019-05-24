@@ -62,12 +62,14 @@ router.post("/createoperation", passport.authenticate('jwt', { session: false })
     });
 });
 
-router.get('/getalloperations', passport.authenticate('jwt', { session: false }), (req, res) => {
-    Operation.find({ userId: req.user.id }).limit(10).sort([['createDate', -1]]).then(operations => {
-        return res.status(200).json({ operations })
-    }).catch(err => {
-        return res.status(500).json({ error: err.message })
-    })
+router.get('/getalloperations/:startDate/:endDate', passport.authenticate('jwt', { session: false }), (req, res) => {
+    const { startDate, endDate } = req.params;
+    Operation.find({ userId: req.user.id, startDate: { $gte :  startDate}, startDate: { $lte :  endDate} })
+        .limit(10).sort([['createDate', -1]]).then(operations => {
+            return res.status(200).json({ operations })
+        }).catch(err => {
+            return res.status(500).json({ error: err.message })
+        })
 });
 
 router.get('/getoperation/:id', passport.authenticate('jwt', { session: false }), (req, res) => {

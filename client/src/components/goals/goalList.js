@@ -5,8 +5,6 @@ import { connect } from 'react-redux'
 import Modal from '../../constants/modals';
 import { getAllGoals } from '../../actions/expenseActions';
 import { setOpened } from '../../actions/modalActions'
-import GoalCard from './GoalCard';
-
 class GoalList extends Component {
 
     componentDidMount() {
@@ -24,31 +22,15 @@ class GoalList extends Component {
         return (
             <>
                 {
-                    !!goals.length && (
-                        <div class="card">
-                            <div class="card-content">
-                                <p>Цели</p>
-                            </div>
-                            <div class="card-tabs">
-                                <ul class="tabs tabs-fixed-width">
-                                    {goals.map((x,i) => (
-                                        <li class="tab">
-                                            <a href={`#goal-${i}`}>{x.target}</a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                            <div class="card-content grey lighten-4">
-                                {goals.map((x,i) => (
-                                    <GoalCard goal={x} id={`goal-${i}`}/>                                                            
-                                ))}
-                            </div>
-                        </div>
-                    )
+                    !!goals.length && goals.map((x, i) => (
+                        <li class="tab">
+                            <span href={`#goal-${i}`}>{x.target}</span>
+                        </li>
+                    ))
                 }
                 {!goals.length && <span>Нет операций за выбранный период</span>}
                 <span onClick={setOpened.bind(this, Modal.CreateGoal, true)}
-                    className="btn-floating btn-medium waves-effect waves-light red">
+                    className="btn-floating btn-medium waves-effect waves-light red m10px">
                     <i className="material-icons">add</i>
                 </span>
             </>

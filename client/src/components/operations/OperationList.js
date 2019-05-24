@@ -62,9 +62,9 @@ class OperationList extends Component {
                         </div>
                     )
                 }
-                {!operations.length && <span>Нет операций за выбранный период</span>}
+                {!operations.length && <div>Нет операций за выбранный период</div>}
                 <span onClick={setOpened.bind(this, Modal.CreateOperation, true)}
-                    className="btn-floating btn-medium waves-effect waves-light red">
+                    className="btn-floating btn-medium waves-effect waves-light red m10px">
                     <i className="material-icons">add</i>
                 </span>
             </>

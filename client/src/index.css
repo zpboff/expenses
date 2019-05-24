@@ -93,3 +93,7 @@ div.react-date-picker__wrapper {
     border: none;
     margin-right: 20px;
 }
+
+span.m10px {
+    margin: 10px;
+}

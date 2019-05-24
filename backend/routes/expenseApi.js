@@ -66,7 +66,10 @@ router.get('/getalloperations/:startDate/:endDate', passport.authenticate('jwt',
     const { startDate, endDate } = req.params;
     Operation.find({
         userId: req.user.id,
-        createDate: { $gte: new Date(startDate).toLocaleDateString(), $lte: new Date(endDate).toLocaleDateString()  }
+        createDate: {
+            $gte: new Date(startDate).toLocaleDateString(),
+            $lte: new Date(endDate).toLocaleDateString()
+        }
     }).limit(10).sort([['createDate', -1]]).then(operations => {
         return res.status(200).json({ operations })
     }).catch(err => {

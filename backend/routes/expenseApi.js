@@ -64,12 +64,14 @@ router.post("/createoperation", passport.authenticate('jwt', { session: false })
 
 router.get('/getalloperations/:startDate/:endDate', passport.authenticate('jwt', { session: false }), (req, res) => {
     const { startDate, endDate } = req.params;
-    Operation.find({ userId: req.user.id, startDate: { $gte :  startDate}, startDate: { $lte :  endDate} })
-        .limit(10).sort([['createDate', -1]]).then(operations => {
-            return res.status(200).json({ operations })
-        }).catch(err => {
-            return res.status(500).json({ error: err.message })
-        })
+    Operation.find({
+        userId: req.user.id,
+        createDate: { $gte: new Date(startDate).toLocaleDateString(), $lte: new Date(endDate).toLocaleDateString()  }
+    }).limit(10).sort([['createDate', -1]]).then(operations => {
+        return res.status(200).json({ operations })
+    }).catch(err => {
+        return res.status(500).json({ error: err.message })
+    })
 });
 
 router.get('/getoperation/:id', passport.authenticate('jwt', { session: false }), (req, res) => {

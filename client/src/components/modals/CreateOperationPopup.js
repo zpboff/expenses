@@ -98,7 +98,7 @@ class CreateOperationPopup extends Component {
                                 </div>
                             </div>
                             <div className="input-field col s6">
-                                <button class="btn waves-effect waves-light" type="submit" name="action">
+                                <button className="btn waves-effect waves-light" type="submit" name="action">
                                     Добавить
                                 </button>
                             </div>

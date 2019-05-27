@@ -7,11 +7,12 @@ import { getAllOperations } from '../../actions/expenseActions';
 import Components from '../../constants/components';
 import Preloader from '../shared/Preloader'
 import DatePicker from 'react-date-picker';
+import moment from 'moment';
 
 class OperationList extends Component {
     state = {
-        startDate: new Date(),
-        endDate: new Date()
+        startDate: moment().subtract(7, 'days').format(),
+        endDate: moment().format()
     }
 
     componentDidMount() {

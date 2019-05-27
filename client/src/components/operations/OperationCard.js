@@ -1,25 +1,23 @@
-import React, { Component } from "react";
+import React from "react";
 import classnames from "classnames";
 
-class OperationCard extends Component {
-    render() {
-        const { isIncome, description, amount, title } = this.props.operation;
-        return (
-            <li className="collection-item avatar">
-                <i
-                    className={classnames("material-icons circle", {
-                        "teal lighten-1": isIncome,
-                        "coral": !isIncome
-                    })}
-                >
-                    {isIncome ? "monetization_on" : "money_off"}
-                </i>
-                <span className="title">{title}</span>
-                <p className='description'>{description}</p>
-                <p>{amount}&nbsp;&#8381;</p>
-            </li>
-        );
-    }
+function OperationCard(props) {
+    const { isIncome, description, amount, title } = props.operation;
+    return (
+        <li className="collection-item avatar">
+            <i
+                className={classnames("material-icons circle", {
+                    "teal lighten-1": isIncome,
+                    "coral": !isIncome
+                })}
+            >
+                {isIncome ? "monetization_on" : "money_off"}
+            </i>
+            <span className="title">{title}</span>
+            <p className='description'>{description}</p>
+            <p>{amount}&nbsp;&#8381;</p>
+        </li>
+    );
 }
 
 export default OperationCard;

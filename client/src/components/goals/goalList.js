@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Modal from '../../constants/modals';
 import { getAllGoals } from '../../actions/expenseActions';
 import { setOpened } from '../../actions/modalActions'
+import GoalCard from './GoalCard';
 class GoalList extends Component {
 
     componentDidMount() {
@@ -19,13 +20,12 @@ class GoalList extends Component {
                 <Preloader />
             )
         }
+
         return (
-            <>
+            <div className="list-group">
                 {
                     !!goals.length && goals.map((x, i) => (
-                        <li class="tab">
-                            <span href={`#goal-${i}`}>{x.target}</span>
-                        </li>
+                        <GoalCard key={`goal-${i}`} goal={x}/>
                     ))
                 }
                 {!goals.length && <span>Нет операций за выбранный период</span>}
@@ -33,7 +33,7 @@ class GoalList extends Component {
                     className="btn-floating btn-medium waves-effect waves-light red m10px">
                     <i className="material-icons">add</i>
                 </span>
-            </>
+            </div>
         )
     }
 

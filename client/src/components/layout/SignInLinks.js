@@ -4,14 +4,14 @@ import { NavLink } from 'react-router-dom';
 class SignInLinks extends Component {
 	render() {
 		return (
-			<React.Fragment>
+			<ul className="right hide-on-med-and-down">
 				<li>
 					<NavLink to="/signin">Вход</NavLink>
 				</li>
 				<li>
 					<NavLink to="/signup">Регистрация</NavLink>
 				</li>
-			</React.Fragment>
+			</ul>
 		);
 	}
 }

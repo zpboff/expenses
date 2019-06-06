@@ -3,23 +3,22 @@ import Popup from "./Popup";
 import Modal from "../../constants/modals";
 import { connect } from "react-redux";
 import InputWithValidation from "../shared/InputWithValidation";
-import { createOperation } from "../../actions/expenseActions";
+import { createGoal } from "../../actions/expenseActions";
 
-class CreateOperationPopup extends Component {
+class CreateGoalPopup extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            description: "",
-            title: "",
+            target: "",
             amount: "",
             errors: {},
-            isIncome: true
+            finishDate: new Date()
         };
     }
 
     onSubmit = event => {
         event.preventDefault();
-        this.props.createOperation({ ...this.state });
+        this.props.createGoal({ ...this.state });
     };
 
     handleInputChange(event) {
@@ -38,20 +37,20 @@ class CreateOperationPopup extends Component {
     }
 
     renderBody = () => {
-        var { isIncome, title, description, amount, errors } = this.state;
+        var { finishDate, target, amount, errors } = this.state;
         return (
             <>
                 <div className="container">
-                    <h5>Добавление операции</h5>
+                    <h5>Добавление цели</h5>
                     <form className="col s12" onSubmit={this.onSubmit}>
                         <div className="row">
                             <div className="input-field col s6">
                                 <InputWithValidation
-                                    value={title}
-                                    field="title"
+                                    value={target}
+                                    field="target"
                                     type="text"
-                                    label="Заголовок"
-                                    error={errors.title}
+                                    label="Цель"
+                                    error={errors.target}
                                     onChange={this.handleInputChange.bind(this)}
                                 />
                             </div>
@@ -68,36 +67,6 @@ class CreateOperationPopup extends Component {
                         </div>
                         <div className="row">
                             <div className="input-field col s12">
-                                <InputWithValidation
-                                    value={description}
-                                    field="description"
-                                    label="Описание"
-                                    type="text"
-                                    error={errors.description}
-                                    onChange={this.handleInputChange.bind(this)}
-                                />
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="input-field col s6">
-                                <div className="switch reverse">
-                                    <label>
-                                        Доход
-                                        <input
-                                            type="checkbox"
-                                            value={isIncome}
-                                            onChange={e =>
-                                                this.setState({
-                                                    isIncome: !isIncome
-                                                })
-                                            }
-                                        />
-                                        <span className="lever" />
-                                        Расход
-                                    </label>
-                                </div>
-                            </div>
-                            <div className="input-field col s6">
                                 <button className="btn waves-effect waves-light" type="submit" name="action">
                                     Добавить
                                 </button>
@@ -113,7 +82,7 @@ class CreateOperationPopup extends Component {
         return (
             <Popup
                 props={{ ...this.props }}
-                popupName={Modal.CreateOperation}
+                popupName={Modal.CreateGoal}
                 renderBody={this.renderBody}
             />
         );
@@ -123,14 +92,10 @@ class CreateOperationPopup extends Component {
 const mapStateToProps = state => {
     return {
         errors: {
-            title: state.errors.title,
-            description: state.errors.title,
+            target: state.errors.target,
             amount: state.errors.amount
         }
     };
 };
 
-export default connect(
-    mapStateToProps,
-    { createOperation }
-)(CreateOperationPopup);
+export default connect(mapStateToProps, { createGoal })(CreateGoalPopup);

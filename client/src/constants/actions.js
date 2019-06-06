@@ -7,8 +7,15 @@ export const ErrorActions = {
 }
 
 export const ExpenseActions = {
+    SET_BALANCE: 'SET_BALANCE',
     SET_OPERATIONS: 'SET_OPERATIONS',
-    ADD_OPERATION: 'ADD_OPERATION'
+    SET_GOALS: 'SET_GOALS',
+    ADD_OPERATION: 'ADD_OPERATION',
+    ADD_GOAL: 'ADD_GOAL'
+}
+
+export const InterfaceActions = {
+    SET_COMPONENT_LOADING: 'SET_COMPONENT_LOADING'
 }
 
 export const ModalActions = {

@@ -90,11 +90,9 @@ class SignIn extends Component {
                             )}
                         </div>
                     </div>
-                    <input
-                        type="submit"
-                        className="waves-effect waves-light btn"
-                        value="Вход"
-                    />
+                    <button class="btn waves-effect waves-light" type="submit" name="action">
+                        Вход
+                    </button>
                 </form>
             </div>
         );
@@ -102,13 +100,13 @@ class SignIn extends Component {
 }
 
 SignIn.propTypes = {
-	errors: PropTypes.object.isRequired,
-	isAuthenticated: PropTypes.bool
+    errors: PropTypes.object.isRequired,
+    isAuthenticated: PropTypes.bool
 };
 
 const mapStateToProps = state => ({
-	errors: state.errors,
-	isAuthenticated: state.auth.isAuthenticated
+    errors: state.errors,
+    isAuthenticated: state.auth.isAuthenticated
 });
 
 const mapDispatchToProps = dispatch => {

@@ -10,6 +10,7 @@ import AuthProvider from "../providers/authProvider";
 import { setCurrentUser, logout } from "../actions/authActions";
 import Graphics from "./Graphics";
 import CreateOperationPopup from "./modals/CreateOperationPopup";
+import CreateGoalPopup from "./modals/CreateGoalPopup";
 
 if (localStorage.jwtToken) {
     AuthProvider.SetAuthToken(localStorage.jwtToken);
@@ -28,7 +29,8 @@ function App() {
         <BrowserRouter>
             <div className="App">
                 <Navbar />
-                <CreateOperationPopup />
+                <CreateOperationPopup />                
+                <CreateGoalPopup />
                 <div className="dashboard container">
                     <div className="row">
                         <Switch>

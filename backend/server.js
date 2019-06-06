@@ -2,8 +2,8 @@ const express = require('express');
 var cors = require('cors');
 const bodyParser = require('body-parser');
 const logger = require('morgan');
-const userApiRoute = require('./routes/userApi')
-const operationApiRoute = require('./routes/operationApi')
+const authApiRoute = require('./routes/authApi')
+const expenseApiRoute = require('./routes/expenseApi')
 const initializeDbConnection = require('./db/connector')
 const { AppSettings } = require('./configs') 
 const cookieParser = require('cookie-parser');
@@ -21,8 +21,8 @@ app.use(bodyParser.json());
 app.use(cookieParser());
 app.use(logger("dev"));
 
-app.use("/api/auth", userApiRoute);
-app.use("/api/operation", operationApiRoute);
+app.use("/api/auth", authApiRoute);
+app.use("/api/expense", expenseApiRoute);
 
 
 app.listen(AppSettings.Port, () => console.log(`LISTENING ON PORT ${AppSettings.Port}`));

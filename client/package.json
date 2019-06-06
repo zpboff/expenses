@@ -5,8 +5,10 @@
   "dependencies": {
     "axios": "^0.18.0",
     "classnames": "^2.2.6",
+    "jquery": "^3.4.1",
     "jwt-decode": "^2.2.0",
     "react": "^16.8.6",
+    "react-date-picker": "^7.5.1",
     "react-dom": "^16.8.6",
     "react-redux": "^7.0.3",
     "react-router": "^5.0.0",
